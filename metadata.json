@@ -2,7 +2,6 @@
   "uuid": "gitlab-tasks@jpupo91",
   "name": "GitLab Tasks",
   "description": "Consulta tus tareas de GitLab y recibe avisos de asignaciones y deploys.",
-  "version": 1,
   "shell-version": ["45", "46", "47", "48", "49", "51"],
   "url": "https://github.com/jpupo91/gitlab-tasks",
   "settings-schema": "org.gnome.shell.extensions.gitlab-tasks"

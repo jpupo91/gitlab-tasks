@@ -1,7 +1,6 @@
 import Clutter from 'gi://Clutter';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
-import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
 import Soup from 'gi://Soup';
 import St from 'gi://St';
@@ -15,6 +14,8 @@ const DEFAULT_INTERVAL = 300;
 const MAX_PROJECTS = 100;
 const MAX_ITEMS = 10;
 const MAX_CONCURRENT_PROJECT_REQUESTS = 5;
+const SCROLL_POLICY_AUTOMATIC = 1;
+const SCROLL_POLICY_NEVER = 2;
 
 function escapeMarkup(text) {
     return text
@@ -449,7 +450,7 @@ export default class GitLabTasksExtension extends Extension {
             overlay_scrollbars: false,
             style_class: 'gitlab-task-description-scroll',
         });
-        scrollView.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+        scrollView.set_policy(SCROLL_POLICY_NEVER, SCROLL_POLICY_AUTOMATIC);
         scrollView.set_size(600, 440);
 
         const content = this._createVerticalBox('padding: 8px;', 10);
@@ -573,7 +574,7 @@ export default class GitLabTasksExtension extends Extension {
                 overlay_scrollbars: false,
                 x_expand: true,
             });
-            this._dataFilterScroll.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.NEVER);
+            this._dataFilterScroll.set_policy(SCROLL_POLICY_AUTOMATIC, SCROLL_POLICY_NEVER);
             this._dataFilterScroll.set_size(760, 44);
             const filterBar = this._createHorizontalBox();
             filterBar.x_expand = false;
@@ -583,7 +584,7 @@ export default class GitLabTasksExtension extends Extension {
                 x_expand: true,
                 y_expand: true,
             });
-            this._dataContentScroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+            this._dataContentScroll.set_policy(SCROLL_POLICY_NEVER, SCROLL_POLICY_AUTOMATIC);
             this._dataContentScroll.set_size(760, 500);
             const content = this._createVerticalBox('padding: 8px;', 12);
             content.y_expand = true;
