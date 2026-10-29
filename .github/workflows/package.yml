@@ -1,0 +1,28 @@
+name: Validate and package extension
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install GNOME packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes gnome-shell libglib2.0-bin
+
+      - name: Validate and package
+        run: make pack
+
+      - name: Upload extension package
+        uses: actions/upload-artifact@v4
+        with:
+          name: gnome-extension
+          path: dist/*.zip
+          if-no-files-found: error
